@@ -22,6 +22,8 @@
               <td>
                 <a href="{{route('category.delete',[ 'id' => $category->id])}}" class="btn btn-xs btn-danger">
                     Delete
+                    <span class="gylphicon gylphicon-danger"></span>
+
                 </a>
               </td>
           </tr>

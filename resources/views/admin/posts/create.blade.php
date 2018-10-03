@@ -24,6 +24,16 @@
                     </div>
                 </div>
                 <div class="form-control row">
+                    <label for="categories" class="col-sm-4 col-form-label">Post Categories</label>
+                    <div class="col-md-12">
+                       <select name="category_id" id="category" class="form-control">
+                           @foreach($categories as $category)
+                              <option value="{{$category->id}}">{{$category->name}}</option>
+                           @endforeach
+                       </select>
+                    </div>
+                </div>
+                <div class="form-control row">
                     <label for="featured" class="col-sm-4 col-form-label">Post Featured Image</label>
                     <div class="col-md-12">
                         <input type="file" name="featured" class="form-control">
