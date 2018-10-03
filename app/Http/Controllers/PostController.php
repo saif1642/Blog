@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Category;
-
+use Session;
+use App\Post;
 class PostController extends Controller
 {
     /**
@@ -42,6 +43,19 @@ class PostController extends Controller
            'featured'=>'required|image',
            'category_id'=>'required'
         ]);
+        $featured_image = $request->featured;
+        $featured_image_new = time().$featured_image->getClientOriginalName();
+        $featured_image->move('uploads/posts',$featured_image_new);
+
+        $post = Post::create([
+            'title' => $request->title,
+            'content' => $request->content,
+            'featured' => 'uploads/posts/'.$featured_image_new,
+            'category_id' => $request->category_id,
+        ]);
+
+        Session::flash('success','Post created successfully!');
+
     }
 
     /**
