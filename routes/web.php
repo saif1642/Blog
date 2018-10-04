@@ -10,6 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/test', function () {
+    dd(App\Post::find(6)->Category()->get());
+});
+
 
 Route::get('/', function () {
     return view('welcome');

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Category;
 use Session;
 use App\Post;
+use App\Tag;
 class PostController extends Controller
 {
     /**
@@ -33,7 +34,8 @@ class PostController extends Controller
             return redirect()->route('posts');
         }
 
-        return view('admin.posts.create')->with('categories',$categories);
+        return view('admin.posts.create')->with('categories',$categories)
+                                        ->with('tags' , Tag::all());
     }
 
     /**
@@ -44,11 +46,15 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request->all());
+
+
         $this->validate($request,[
            'title'=>'required',
            'content'=>'required',
            'featured'=>'required|image',
-           'category_id'=>'required'
+           'category_id'=>'required',
+           'tags'=>'required'
         ]);
         $featured_image = $request->featured;
         $featured_image_new = time().$featured_image->getClientOriginalName();
@@ -62,8 +68,10 @@ class PostController extends Controller
             'slug'   => str_slug($request->title)
         ]);
 
+        $post->tags()->attach($request->tags);
+
         Session::flash('success','Post created successfully!');
-        return redirect()->back();
+        return redirect()->route('posts');
 
     }
 
@@ -88,7 +96,9 @@ class PostController extends Controller
     {
         $post = Post::find($id);
         $categories = Category::all();
-        return view('admin.posts.edit')->with('post',$post)->with('categories',$categories);
+        return view('admin.posts.edit')->with('post',$post)
+                                       ->with('categories',$categories)
+                                       ->with('tags',Tag::all());
     }
 
     /**
@@ -103,7 +113,8 @@ class PostController extends Controller
         $this->validate($request,[
             'title'=>'required',
             'content'=>'required',
-            'category_id'=>'required'
+            'category_id'=>'required',
+            'tags'=>'required'
          ]);
          $post = Post::find($id);
 
@@ -116,6 +127,7 @@ class PostController extends Controller
          $post->title = $request->title;
          $post->content = $request->content;
          $post->category_id = $request->category_id;
+         $post->tags()->attach($request->tags);
          $post->save();
 
          return redirect()->route('posts');
