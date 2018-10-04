@@ -10,30 +10,36 @@
           <th>Delete</th>
       </thead>
       <tbody>
-          @foreach($posts as $post)
-          <tr>
-              <td>
-                  <img src="{{$post->featured}}" alt="post_image" width="50px">
-              </td>
-              <td>
-                 {{$post->title}}
-              </td>
-              <td>
-                  Edit
-              </td>
+          @if($posts->count() >0)
+            @foreach($posts as $post)
+            <tr>
                 <td>
-                    <a href="{{route('post.restore',[ 'id' => $post->id])}}" class="btn btn-xs btn-success">
-                        Restore
-                    </a>
+                    <img src="{{$post->featured}}" alt="post_image" width="50px">
                 </td>
                 <td>
-                    <a href="{{route('post.kill',[ 'id' => $post->id])}}" class="btn btn-xs btn-danger">
-                        Delete
-                    </a>
+                    {{$post->title}}
                 </td>
-              
-          </tr>
-          @endforeach
+                <td>
+                    Edit
+                </td>
+                    <td>
+                        <a href="{{route('post.restore',[ 'id' => $post->id])}}" class="btn btn-xs btn-success">
+                            Restore
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{{route('post.kill',[ 'id' => $post->id])}}" class="btn btn-xs btn-danger">
+                            Delete
+                        </a>
+                    </td>
+                
+            </tr>
+            @endforeach
+          @else
+             <tr>
+                 <th colspan="5">No Trashed Post</th>
+             </tr>
+          @endif
       </tbody>
   </table>
 @stop
