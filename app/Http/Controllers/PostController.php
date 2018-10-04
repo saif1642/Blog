@@ -86,7 +86,9 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Post::find($id);
+        $categories = Category::all();
+        return view('admin.posts.edit')->with('post',$post)->with('categories',$categories);
     }
 
     /**
@@ -98,7 +100,26 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'title'=>'required',
+            'content'=>'required',
+            'category_id'=>'required'
+         ]);
+         $post = Post::find($id);
+
+         if($request->hasFile('featured')){
+            $featured_image = $request->featured;
+            $featured_image_new = time().$featured_image->getClientOriginalName();
+            $featured_image->move('uploads/posts',$featured_image_new);
+            $post->featured = 'uploads/posts/'.$featured_image_new;
+         }
+         $post->title = $request->title;
+         $post->content = $request->content;
+         $post->category_id = $request->category_id;
+         $post->save();
+
+         return redirect()->route('posts');
+
     }
 
     /**
