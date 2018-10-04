@@ -19,11 +19,15 @@
                     {{$user->name}}
                 </td>
                 <td>
-                    Permission
+                    @if($user->admin)
+                      <a href="{{route('user.notadmin',['id'=>$user->id])}}" class="btn btn-xs btn-info">Make User</a>
+                    @else
+                      <a href="{{route('user.admin',['id'=>$user->id])}}" class="btn btn-xs btn-success">Make Admin</a>
+                    @endif
                 </td>
                 
                 <td>
-                    Delete
+                    <a href="{{route('user.delete',['id'=>$user->id])}}" class="btn btn-xs btn-danger">Delete</a>
                 </td>
             </tr>
             @endforeach

@@ -123,10 +123,31 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
         'uses' => 'CategoryController@destroy',
         'as'  => 'category.delete'
     ]);
+
     
     Route::get('/users',[
         'uses' => 'ProfileController@index',
         'as'  => 'users'
+    ]);
+    Route::get('/user/create',[
+        'uses' => 'UserController@create',
+        'as'  => 'user.create'
+    ]);
+    Route::post('/user/store',[
+        'uses' => 'UserController@store',
+        'as'  => 'user.store'
+    ]);
+    Route::get('/user/admin/{id}',[
+        'uses' => 'UserController@admin',
+        'as'  => 'user.admin'
+    ]);
+    Route::get('/user/notadmin/{id}',[
+        'uses' => 'UserController@notadmin',
+        'as'  => 'user.notadmin'
+    ]);
+    Route::get('/user/delete/{id}',[
+        'uses' => 'UserController@destroy',
+        'as'  => 'user.delete'
     ]);
 
     
