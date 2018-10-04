@@ -34,6 +34,7 @@
           @else
             <tr>
                 <th colspan="5">No Post Found!!</th>
+                
             </tr>
           @endif
       </tbody>

@@ -28,7 +28,11 @@
                     <div class="col-md-12">
                        <select name="category_id" id="category" class="form-control">
                            @foreach($categories as $category)
-                              <option value="{{$category->id}}">{{$category->name}}</option>
+                              <option value="{{$category->id}}" 
+                                  @if($post_cat_id == $category->id)
+                                   selected
+                                  @endif
+                                >{{$category->name}}</option>
                            @endforeach
                        </select>
                     </div>
@@ -43,7 +47,13 @@
                     <label for="featured" class="col-sm-4 col-form-label">Select Tags</label>
                     @foreach ($tags as $tag)  
                         <div class="checkbox">
-                            <label class="col-sm-4 col-form-label"><input type="checkbox" value="{{$tag->id}}" name=tags[]>
+                            <label class="col-sm-4 col-form-label"><input type="checkbox" value="{{$tag->id}}" name=tags[]
+                                @foreach($post->tags as $t)
+                                   @if($tag->id == $t->id)
+                                    checked
+                                   @endif
+                                @endforeach
+                                >
                                 {{$tag->tag}}
                             </label>
                         </div>

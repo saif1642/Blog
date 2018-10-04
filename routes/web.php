@@ -124,6 +124,12 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
         'as'  => 'category.delete'
     ]);
     
+    Route::get('/users',[
+        'uses' => 'ProfileController@index',
+        'as'  => 'users'
+    ]);
+
+    
 
 });
 

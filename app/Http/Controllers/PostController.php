@@ -96,9 +96,11 @@ class PostController extends Controller
     {
         $post = Post::find($id);
         $categories = Category::all();
+        $post_cat_id = $post->category_id;
         return view('admin.posts.edit')->with('post',$post)
                                        ->with('categories',$categories)
-                                       ->with('tags',Tag::all());
+                                       ->with('tags',Tag::all())
+                                       ->with('post_cat_id',$post_cat_id);
     }
 
     /**
@@ -127,7 +129,9 @@ class PostController extends Controller
          $post->title = $request->title;
          $post->content = $request->content;
          $post->category_id = $request->category_id;
+
          $post->tags()->attach($request->tags);
+
          $post->save();
 
          return redirect()->route('posts');
