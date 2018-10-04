@@ -15,7 +15,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $posts = Post::all();
+        return view('admin.posts.index')->with('posts',$posts);
     }
 
     /**
@@ -29,7 +30,7 @@ class PostController extends Controller
         if($categories->count() == 0){
 
             Session::flash('info','Create category before creating some posts!');
-            return redirect()->back();
+            return redirect()->route('posts');
         }
 
         return view('admin.posts.create')->with('categories',$categories);
