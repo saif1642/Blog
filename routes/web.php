@@ -23,6 +23,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
         'as'  => 'home'
     ]);
     
+    
     Route::get('/post/create',[
         'uses' => 'PostController@create',
         'as'  => 'post.create'
@@ -36,6 +37,24 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
         'uses' => 'PostController@index',
         'as'  => 'posts'
     ]);
+    Route::get('/post/delete/{id}',[
+        'uses' => 'PostController@destroy',
+        'as'  => 'post.delete'
+    ]);
+    Route::get('/post/trashed',[
+        'uses' => 'PostController@trashed',
+        'as'  => 'post.trashed'
+    ]);
+    Route::get('/post/kill/{id}',[
+        'uses' => 'PostController@kill',
+        'as'  => 'post.kill'
+    ]);
+    Route::get('/post/restore/{id}',[
+        'uses' => 'PostController@restore',
+        'as'  => 'post.restore'
+    ]);
+
+
 
     Route::get('/category/create',[
         'uses' => 'CategoryController@create',
