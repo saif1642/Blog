@@ -126,7 +126,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
 
     
     Route::get('/users',[
-        'uses' => 'ProfileController@index',
+        'uses' => 'UserController@index',
         'as'  => 'users'
     ]);
     Route::get('/user/create',[
@@ -148,6 +148,14 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     Route::get('/user/delete/{id}',[
         'uses' => 'UserController@destroy',
         'as'  => 'user.delete'
+    ]);
+    Route::get('/user/profile/create',[
+        'uses' => 'ProfileController@index',
+        'as'  => 'user.profile.create'
+    ]);
+    Route::post('/user/profile/update',[
+        'uses' => 'ProfileController@update',
+        'as'  => 'user.profile.update'
     ]);
 
     

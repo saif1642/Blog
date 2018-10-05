@@ -111,6 +111,9 @@
                                 <a href="{{ route('user.create') }}">Create User</a>
                             </li>
                         @endif
+                        <li class="list-group-item">
+                            <a href="{{ route('user.profile.create') }}">Profile</a>
+                        </li>
 
                     </ul>
                 </div>
