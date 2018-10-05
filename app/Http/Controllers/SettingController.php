@@ -7,6 +7,12 @@ use App\Setting;
 use Session;
 class SettingController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('admin');
+    }
+
     public function index(){
 
         return view('admin.settings')->with('setting',Setting::first());
