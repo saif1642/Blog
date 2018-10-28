@@ -24,10 +24,16 @@ class FrontendController extends Controller
     }
     public function singlePost($slug){
         $post = Post::where('slug',$slug)->first();
+        $next_id = Post::where('id','>',$post->id)->min('id');
+        $previous_id = Post::where('id','<',$post->id)->max('id');
+
         return view('single')->with('post',$post)
                             ->with('site_name',Setting::first()->site_name)
                             ->with('title',$post->title)
                             ->with('categories',Category::all()->take(4))
-                            ->with('setting',Setting::first());
+                            ->with('setting',Setting::first())
+                            ->with('next_post',Post::find($next_id))
+                            ->with('previous_post',Post::find($previous_id));
+
     }
 }

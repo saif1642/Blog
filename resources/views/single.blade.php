@@ -121,27 +121,28 @@
                     </div>
     
                     <div class="pagination-arrow">
-    
-                        <a href="#" class="btn-prev-wrap">
+                        @if($next_post)
+                        <a href="{{route('post.single',['slug'=>$next_post->slug])}}" class="btn-prev-wrap">
                             <svg class="btn-prev">
                                 <use xlink:href="#arrow-left"></use>
                             </svg>
                             <div class="btn-content">
                                 <div class="btn-content-title">Next Post</div>
-                                <p class="btn-content-subtitle">Claritas Est Etiam Processus</p>
+                                <p class="btn-content-subtitle">{{$next_post->title}}</p>
                             </div>
                         </a>
-    
-                        <a href="#" class="btn-next-wrap">
+                        @endif
+                        @if($previous_post)
+                        <a href="{{route('post.single',['slug'=>$previous_post->slug])}}" class="btn-next-wrap">
                             <div class="btn-content">
                                 <div class="btn-content-title">Previous Post</div>
-                                <p class="btn-content-subtitle">Duis Autem Velius</p>
+                                <p class="btn-content-subtitle">{{$previous_post->title}}</p>
                             </div>
                             <svg class="btn-next">
                                 <use xlink:href="#arrow-right"></use>
                             </svg>
                         </a>
-    
+                        @endif
                     </div>
     
                     <div class="comments">

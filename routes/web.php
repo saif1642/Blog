@@ -19,7 +19,7 @@ Route::get('/',[
     'uses' => 'FrontendController@index',
     'as'  => 'index'
 ]);
-Route::get('/{slug}',[
+Route::get('/post/{slug}',[
     'uses' => 'FrontendController@singlePost',
     'as'  => 'post.single'
 ]);
